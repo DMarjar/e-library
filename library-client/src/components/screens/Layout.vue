@@ -3,7 +3,7 @@
         <div id="nav">
             <b-row>
                 <div>
-                    <b-nav pills>
+                    <b-nav tabs>
                         <b-nav-item disabled>E-Libreria</b-nav-item>
                         <b-nav-item active>Creacion de libros</b-nav-item>
                     </b-nav>

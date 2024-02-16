@@ -37,12 +37,17 @@
           label="Género"
           label-for="genre"
       >
-        <b-form-input
+        <b-form-select
+            class="form-select"
             id="genre"
-            type="text"
             v-model="genre"
+            :options="genreList"
             required
-        ></b-form-input>
+        >
+          <template #first>
+            <option :value="null" disabled>Seleccione un género</option>
+          </template>
+        </b-form-select>
       </b-form-group>
       <b-form-group
           label="Año"
@@ -62,15 +67,20 @@
 <script>
 import Vue from "vue";
 import bookService from "../../services/Books.js";
+import genreList from "@/utils/GenreList";
 
 export default Vue.extend({
   name: "CreateBookModal",
   data() {
     return {
+      // Book
       title: "",
       author: "",
       genre: "",
       year: "",
+
+      // Genre list
+      genreList,
     }
   },
 

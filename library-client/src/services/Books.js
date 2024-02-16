@@ -15,9 +15,9 @@ const getBooksPaginated = async (page, size, sort) => {
     }
 };
 
-const saveBook = async (vehicle) => {
+const saveBook = async (book) => {
     try {
-        const response = await axios.post('http://localhost:8081/api/books', vehicle);
+        const response = await axios.post('http://localhost:8081/api/books', book);
         return response.data;
     } catch (error) {
         throw error;
@@ -25,7 +25,26 @@ const saveBook = async (vehicle) => {
 
 }
 
+const deleteBook = async (id) => {
+    try {
+        const response = await axios.delete('http://localhost:8081/api/book/' + id);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+const editBook = async (id, book) => {
+    try {
+        const response = await axios.put('http://localhost:8081/api/book/' + id, book);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
 export default {
     getBooksPaginated,
-    saveBook
+    saveBook,
+    deleteBook
 };

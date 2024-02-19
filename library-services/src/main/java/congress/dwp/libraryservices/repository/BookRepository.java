@@ -1,8 +1,17 @@
 package congress.dwp.libraryservices.repository;
 
 import congress.dwp.libraryservices.model.Book;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BookRepository extends JpaRepository<Book, Long> {
+import java.util.Date;
+import java.util.List;
 
+public interface BookRepository extends JpaRepository<Book, Long> {
+    Page<Book> findByTitleContaining(String title, Pageable page);
+    Page<Book> findByAuthorContaining(String author, Pageable page);
+    Page<Book> findByFullPublishDateBetween(Date start, Date end, Pageable page);
+    Page<Book> findByGenreContaining(String genre, Pageable page);
+    Page<Book> findByOrderByFullPublishDate(Pageable page);
 }

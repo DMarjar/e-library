@@ -1,6 +1,7 @@
 package congress.dwp.libraryservices.controller;
 
 import congress.dwp.libraryservices.model.Book;
+import congress.dwp.libraryservices.model.dto.DateRangeDTO;
 import congress.dwp.libraryservices.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +16,7 @@ public class BookController {
     private BookService service;
 
     @PostMapping("/book")
-    public Book saveBook(@RequestBody(required = true) Book book) {
+    public Book saveBook(@RequestBody() Book book) {
         return service.saveBook(book);
     }
 
@@ -38,5 +39,30 @@ public class BookController {
     public Book updateBook(@PathVariable Long id, @RequestBody Book book) {
         book.setId(id);
         return service.updateBook(book);
+    }
+
+    @GetMapping("/book/title/{title}")
+    public Page<Book> findByTitleContaining(@PathVariable String title, Pageable page) {
+        return service.findByTitleContaining(title, page);
+    }
+
+    @GetMapping("/book/author/{author}")
+    public Page<Book> findByAuthorContaining(@PathVariable String author, Pageable page) {
+        return service.findByAuthorContaining(author, page);
+    }
+
+    @PostMapping("/book/date/between")
+    public Page<Book> findByFullPublishDateBetween(@RequestBody DateRangeDTO dates, Pageable page) {
+        return service.findByFullPublishDateBetween(dates.getStart(), dates.getEnd(), page);
+    }
+
+    @GetMapping("/book/genre/{genre}")
+    public Page<Book> findByGenreContaining(@PathVariable String genre, Pageable page) {
+        return service.findByGenreContaining(genre, page);
+    }
+
+    @GetMapping("/book/date/desc")
+    public Page<Book> findByOrderByFullPublishDate(Pageable page) {
+        return service.findByOrderByFullPublishDate(page);
     }
 }

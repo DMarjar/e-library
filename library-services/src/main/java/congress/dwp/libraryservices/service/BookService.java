@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class BookService {
     @Autowired
@@ -34,7 +36,27 @@ public class BookService {
         bookToUpdate.setAuthor(book.getAuthor());
         bookToUpdate.setTitle(book.getTitle());
         bookToUpdate.setGenre(book.getGenre());
-        bookToUpdate.setYear(book.getYear());
+        bookToUpdate.setFullPublishDate(book.getFullPublishDate());
         return repository.save(bookToUpdate);
+    }
+
+    public Page<Book> findByTitleContaining(String title, Pageable page) {
+        return repository.findByTitleContaining(title, page);
+    }
+
+    public Page<Book> findByAuthorContaining(String author, Pageable page) {
+        return repository.findByAuthorContaining(author, page);
+    }
+
+    public Page<Book> findByFullPublishDateBetween(Date start, Date end, Pageable page) {
+        return repository.findByFullPublishDateBetween(start, end, page);
+    }
+
+    public Page<Book> findByGenreContaining(String genre, Pageable page) {
+        return repository.findByGenreContaining(genre, page);
+    }
+
+    public Page<Book> findByOrderByFullPublishDate(Pageable page) {
+        return repository.findByOrderByFullPublishDate(page);
     }
 }

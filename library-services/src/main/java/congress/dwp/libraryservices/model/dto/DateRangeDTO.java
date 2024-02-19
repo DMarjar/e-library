@@ -1,30 +1,30 @@
 package congress.dwp.libraryservices.model.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class DateRangeDTO {
-    private Date start;
-    private Date end;
+    private LocalDate start;
+    private LocalDate end;
 
     public DateRangeDTO() {}
 
-    public Date getStart() {
+    public LocalDate getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(LocalDate start) {
         this.start = start;
     }
 
-    public Date getEnd() {
+    public LocalDate getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(LocalDate end) {
         this.end = end;
     }
 
-    public DateRangeDTO(Date start, Date end) {
+    public DateRangeDTO(LocalDate start, LocalDate end) {
         this.start = start;
         this.end = end;
     }

@@ -49,17 +49,47 @@
           </template>
         </b-form-select>
       </b-form-group>
-      <b-form-group
-          label="Año"
-          label-for="year"
-      >
-        <b-form-input
-            id="year"
-            type="number"
-            v-model="year"
-            required
-        ></b-form-input>
-      </b-form-group>
+      <b-row no-gutters>
+        <b-col cols="4">
+          <b-form-group
+              label="Año"
+              label-for="year"
+          >
+            <b-form-input
+                id="year"
+                type="number"
+                v-model="year"
+                required
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col cols="4">
+          <b-form-group
+              label="Mes"
+              label-for="month"
+          >
+            <b-form-input
+                id="month"
+                type="number"
+                v-model="month"
+                required
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col cols="4">
+          <b-form-group
+              label="Día"
+              label-for="day"
+          >
+            <b-form-input
+                id="day"
+                type="number"
+                v-model="day"
+                required
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-row>
     </b-form>
   </b-modal>
 </template>
@@ -84,6 +114,8 @@ export default Vue.extend({
       author: "",
       genre: "",
       year: "",
+      month: "",
+      day: "",
 
       // Genre list
       genreList,
@@ -95,15 +127,20 @@ export default Vue.extend({
       this.title = this.book.title;
       this.author = this.book.author;
       this.genre = this.book.genre;
-      this.year = this.book.year;
+      const publishDate = this.book.fullPublishDate.split("-");
+      this.year = publishDate[0];
+      this.month = publishDate[1];
+      this.day = publishDate[2];
     },
+
     async onSubmit() {
+      const fullPublishDate = `${this.year}-${this.month}-${this.day}`;
       const book = {
         id: this.book.id,
         title: this.title,
         author: this.author,
         genre: this.genre,
-        year: this.year,
+        fullPublishDate,
       };
       await bookService.editBook(book);
       this.$emit("book-updated");

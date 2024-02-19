@@ -49,17 +49,50 @@
           </template>
         </b-form-select>
       </b-form-group>
-      <b-form-group
-          label="Año"
-          label-for="year"
-      >
-        <b-form-input
-            id="year"
-            type="number"
-            v-model="year"
-            required
-        ></b-form-input>
-      </b-form-group>
+      <b-row no-gutters>
+        <b-col cols="4">
+          <b-form-group
+              label="Año"
+              label-for="year"
+          >
+            <b-form-input
+                id="year"
+                type="number"
+                placeholder="yyyy"
+                v-model="year"
+                required
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col cols="4">
+          <b-form-group
+              label="Mes"
+              label-for="month"
+          >
+            <b-form-input
+                id="month"
+                type="number"
+                placeholder="mm"
+                v-model="month"
+                required
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col cols="4">
+          <b-form-group
+              label="Día"
+              label-for="day"
+          >
+            <b-form-input
+                id="day"
+                type="number"
+                placeholder="dd"
+                v-model="day"
+                required
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-row>
     </b-form>
   </b-modal>
 </template>
@@ -78,6 +111,8 @@ export default Vue.extend({
       author: "",
       genre: "",
       year: "",
+      month: "",
+      day: "",
 
       // Genre list
       genreList,
@@ -86,11 +121,12 @@ export default Vue.extend({
 
   methods: {
     async onSubmit() {
+      const fullPublishDate = `${this.year}-${this.month}-${this.day}`;
       const book = {
         title: this.title,
         author: this.author,
         genre: this.genre,
-        year: this.year,
+        fullPublishDate,
       };
       await bookService.saveBook(book);
       this.$emit("book-created");

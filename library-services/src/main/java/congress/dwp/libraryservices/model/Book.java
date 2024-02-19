@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Book {
@@ -13,7 +13,7 @@ public class Book {
     private String title;
     private String author;
     private String genre;
-    private Date fullPublishDate;
+    private LocalDate fullPublishDate;
 
     public Long getId() {
         return id;
@@ -47,11 +47,11 @@ public class Book {
         this.genre = genre;
     }
 
-    public Date getFullPublishDate() {
+    public LocalDate getFullPublishDate() {
         return fullPublishDate;
     }
 
-    public void setFullPublishDate(Date fullPublishDate) {
+    public void setFullPublishDate(LocalDate fullPublishDate) {
         this.fullPublishDate = fullPublishDate;
     }
 }

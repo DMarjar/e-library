@@ -1,7 +1,10 @@
 package congress.dwp.libraryservices.controller;
 
 import congress.dwp.libraryservices.model.Book;
+import congress.dwp.libraryservices.model.dto.AuthorDTO;
 import congress.dwp.libraryservices.model.dto.DateRangeDTO;
+import congress.dwp.libraryservices.model.dto.GenreDTO;
+import congress.dwp.libraryservices.model.dto.TitleDTO;
 import congress.dwp.libraryservices.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,14 +44,14 @@ public class BookController {
         return service.updateBook(book);
     }
 
-    @GetMapping("/book/title/{title}")
-    public Page<Book> findByTitleContaining(@PathVariable String title, Pageable page) {
-        return service.findByTitleContaining(title, page);
+    @PostMapping("/book/title")
+    public Page<Book> findByTitleContaining(@RequestBody TitleDTO title, Pageable page) {
+        return service.findByTitleContaining(title.getTitle(), page);
     }
 
-    @GetMapping("/book/author/{author}")
-    public Page<Book> findByAuthorContaining(@PathVariable String author, Pageable page) {
-        return service.findByAuthorContaining(author, page);
+    @PostMapping("/book/author")
+    public Page<Book> findByAuthorContaining(@RequestBody AuthorDTO author, Pageable page) {
+        return service.findByAuthorContaining(author.getAuthor(), page);
     }
 
     @PostMapping("/book/date/between")
@@ -56,13 +59,13 @@ public class BookController {
         return service.findByFullPublishDateBetween(dates.getStart(), dates.getEnd(), page);
     }
 
-    @GetMapping("/book/genre/{genre}")
-    public Page<Book> findByGenreContaining(@PathVariable String genre, Pageable page) {
-        return service.findByGenreContaining(genre, page);
+    @PostMapping("/book/genre")
+    public Page<Book> findByGenreContaining(@RequestBody GenreDTO genre, Pageable page) {
+        return service.findByGenreContaining(genre.getGenre(), page);
     }
 
-    @GetMapping("/book/date/desc")
+    @PostMapping("/book/date/descending")
     public Page<Book> findByOrderByFullPublishDate(Pageable page) {
-        return service.findByOrderByFullPublishDate(page);
+        return service.findByOrderByFullPublishDateDesc(page);
     }
 }

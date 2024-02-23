@@ -10,6 +10,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use (BootstrapVue)
 Vue.use (IconsPlugin)
 
+
+import 'animate.css';
+
 Vue.config.productionTip = false
 
 new Vue({
